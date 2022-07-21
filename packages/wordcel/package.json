@@ -1,0 +1,35 @@
+{
+    "name": "@wordcel-ts/wordcel",
+    "version": "0.1.0",
+    "description": "Library to interact with the onchain wordcel program",
+    "author": "abishekk92 <shek@wordcel.club>",
+    "homepage": "",
+    "license": "MIT",
+    "main": "lib/wordcel.js",
+    "typings": "ib/index.d.ts",
+    "directories": {
+        "lib": "lib",
+        "test": "tests"
+    },
+    "files": [
+        "lib"
+    ],
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "build": "tsc",
+        "test": "mocha -r ts-node/register tests/*.spec.ts"
+    },
+    "devDependencies": {
+        "@types/chai": "^4.3.1",
+        "@types/mocha": "^9.1.1",
+        "chai": "^4.3.6",
+        "mocha": "^10.0.0"
+    },
+    "dependencies": {
+        "@bundlr-network/client": "^0.5.12",
+        "@project-serum/anchor": "^0.24.2",
+        "ts-node": "^10.9.1"
+    }
+}
