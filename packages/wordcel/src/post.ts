@@ -20,18 +20,15 @@ export class Post {
     return this.sdk.program.account.post.fetch(account);
   }
 
-  // @unsupported
   createPost() {
-    console.log("Post Created");
+    throw new Error("Unsupported Action");
   }
 
-  // @unsupported
   updatePost() {
-    console.log("Post Updated");
+    throw new Error("Unsupported Action");
   }
 
-  // @unsupported
   deletePost() {
-    console.log("Post Deleted");
+    throw new Error("Unsupported Action");
   }
 }

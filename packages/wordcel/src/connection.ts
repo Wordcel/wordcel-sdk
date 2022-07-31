@@ -1,7 +1,6 @@
 import { SDK } from "./sdk";
 import * as anchor from "@project-serum/anchor";
 import { SEED_PREFIXES, WORDCEL_PROGRAMS } from "./constants";
-import { gql } from "graphql-request";
 
 export class Connection {
   readonly sdk: SDK;
@@ -29,26 +28,10 @@ export class Connection {
   }
 
   createConnection() {
-    console.log("Followed");
+    throw new Error("Unsupported Action");
   }
 
   closeConnection() {
-    console.log("Unfollowed");
-  }
-
-  getConnections(user: anchor.web3.PublicKey) {
-    const query = gql`
-        query getConnectionsByUser {
-            wordcel_0_1_1_decoded_connection(
-            where: {authority: {_eq: "${user}"}}
-            ) {
-                profile
-                profile_in_connection {
-                    authority
-                }
-            }
-      }
-    `;
-    return this.sdk.gqlClient.request(query);
+    throw new Error("Unsupported Action");
   }
 }

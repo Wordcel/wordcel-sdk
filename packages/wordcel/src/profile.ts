@@ -22,6 +22,6 @@ export class Profile {
 
   // @unsupported
   createProfile() {
-    console.log("Profile Created");
+    throw new Error("Unsupported Action");
   }
 }

@@ -1,37 +1,16 @@
 import { SDK, Connection } from "../src";
+import { DummyWallet } from "./utils/wallet";
 import { expect } from "chai";
 import * as anchor from "@project-serum/anchor";
 
-import {
-  clusterApiUrl,
-  Cluster,
-  Transaction,
-  PublicKey,
-} from "@solana/web3.js";
+import { clusterApiUrl, Cluster, PublicKey } from "@solana/web3.js";
+
 import { GraphQLClient } from "graphql-request";
-
-export class DummyWallet {
-  publicKey: PublicKey;
-
-  constructor() {
-    const dummyPair = anchor.web3.Keypair.generate();
-    const publicKey = dummyPair.publicKey;
-  }
-
-  async signTransaction(tx: Transaction): Promise<Transaction> {
-    tx = new Transaction();
-    return Promise.resolve(tx);
-  }
-
-  async signAllTransactions(txs: Transaction[]): Promise<Transaction[]> {
-    return Promise.resolve(txs);
-  }
-}
 
 describe("connection", async () => {
   let connection: Connection;
 
-  before(async () => {
+  before(() => {
     // Set up SDK
     // When testing on mainnet make sure the tests don't mutate and its readonly
     const cluster: Cluster = "mainnet-beta";
@@ -61,11 +40,11 @@ describe("connection", async () => {
     connection = new Connection(sdk);
   });
 
-  it("should get connections", async () => {
-    const user = new PublicKey("JAnUxaoNAnABRLLsJh4911CM1h5BEGNQrAuTBa7CzpV2");
-    const result = await connection.getConnections(user);
-    expect(result["wordcel_0_1_1_decoded_connection"].length).to.be.greaterThan(
-      0
-    );
-  });
+  // it("should get connections", async () => {
+  //   const user = new PublicKey("JAnUxaoNAnABRLLsJh4911CM1h5BEGNQrAuTBa7CzpV2");
+  //   const result = await connection.getConnections(user);
+  //   expect(result["wordcel_0_1_1_decoded_connection"].length).to.be.greaterThan(
+  //     0
+  //   );
+  // });
 });
