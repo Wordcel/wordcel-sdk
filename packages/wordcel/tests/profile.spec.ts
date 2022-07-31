@@ -1,12 +1,12 @@
-import { SDK, Connection } from "../src";
+import { SDK, Profile } from "../src";
 import { DummyWallet } from "./utils/wallet";
 import { expect } from "chai";
 import * as anchor from "@project-serum/anchor";
 
 import { GraphQLClient } from "graphql-request";
 
-describe("Connection", async () => {
-  let connection: Connection;
+describe("Profile", async () => {
+  let profile: Profile;
 
   before(() => {
     // Set up SDK
@@ -32,8 +32,8 @@ describe("Connection", async () => {
       },
     });
 
-    const sdk = new SDK(provider, "localnet", gqlClient);
-    connection = new Connection(sdk);
+    const sdk = new SDK(provider, "devnet", gqlClient);
+    profile = new Profile(sdk);
   });
 
   it("should do something", async () => {});

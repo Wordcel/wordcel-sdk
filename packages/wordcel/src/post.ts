@@ -1,6 +1,9 @@
 import { SDK } from "./sdk";
 import * as anchor from "@project-serum/anchor";
 import { SEED_PREFIXES, WORDCEL_PROGRAMS } from "./constants";
+import randombytes from "randombytes";
+
+const { SystemProgram } = anchor.web3;
 
 export class Post {
   readonly sdk: SDK;
@@ -9,10 +12,10 @@ export class Post {
     this.sdk = sdk;
   }
 
-  getPostPDA(sdk: SDK, randomHash: Buffer) {
+  postPDA(randomHash: Buffer) {
     return anchor.web3.PublicKey.findProgramAddress(
       [SEED_PREFIXES["post"], randomHash],
-      WORDCEL_PROGRAMS[sdk.cluster]
+      WORDCEL_PROGRAMS[this.sdk.cluster]
     );
   }
 
@@ -20,15 +23,38 @@ export class Post {
     return this.sdk.program.account.post.fetch(account);
   }
 
-  createPost() {
-    throw new Error("Unsupported Action");
+  async createPost(
+    user: anchor.web3.PublicKey,
+    profileAccount: anchor.web3.PublicKey,
+    metadataUri: String
+  ) {
+    const randomHash = randombytes(32);
+    const [postAccount, _] = await this.postPDA(randomHash);
+    return this.sdk.program.methods
+      .createPost(metadataUri, randomHash)
+      .accounts({
+        post: postAccount,
+        profile: profileAccount,
+        authority: user,
+        systemProgram: SystemProgram.programId,
+      })
+      .rpc();
   }
 
-  updatePost() {
-    throw new Error("Unsupported Action");
-  }
-
-  deletePost() {
-    throw new Error("Unsupported Action");
+  updatePost(
+    user: anchor.web3.PublicKey,
+    profileAccount: anchor.web3.PublicKey,
+    postAccount: anchor.web3.PublicKey,
+    metadataUri: String
+  ) {
+    return this.sdk.program.methods
+      .updatePost(metadataUri)
+      .accounts({
+        post: postAccount,
+        profile: profileAccount,
+        authority: user,
+        systemProgram: SystemProgram.programId,
+      })
+      .rpc();
   }
 }

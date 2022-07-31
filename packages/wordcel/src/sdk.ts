@@ -7,12 +7,12 @@ import { GraphQLClient } from "graphql-request";
 export class SDK {
   readonly program: anchor.Program;
   readonly provider: anchor.AnchorProvider;
-  readonly cluster: Cluster;
+  readonly cluster: Cluster | "localnet";
   readonly gqlClient: GraphQLClient;
 
   constructor(
     provider: anchor.AnchorProvider,
-    cluster: Cluster,
+    cluster: Cluster | "localnet",
     gqlClient: GraphQLClient
   ) {
     this.program = new anchor.Program(

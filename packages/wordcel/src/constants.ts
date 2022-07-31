@@ -7,6 +7,9 @@ export const WORDCEL_PROGRAMS = {
   devnet: new anchor.web3.PublicKey(
     "D9JJgeRf2rKq5LNMHLBMb92g4ZpeMgCyvZkd7QKwSCzg"
   ),
+  localnet: new anchor.web3.PublicKey(
+    "D9JJgeRf2rKq5LNMHLBMb92g4ZpeMgCyvZkd7QKwSCzg"
+  ),
 };
 
 export const SEED_PREFIXES = {

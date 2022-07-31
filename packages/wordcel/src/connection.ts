@@ -2,6 +2,8 @@ import { SDK } from "./sdk";
 import * as anchor from "@project-serum/anchor";
 import { SEED_PREFIXES, WORDCEL_PROGRAMS } from "./constants";
 
+const { SystemProgram } = anchor.web3;
+
 export class Connection {
   readonly sdk: SDK;
 
@@ -27,11 +29,41 @@ export class Connection {
     return this.sdk.program.account.connection.fetch(account);
   }
 
-  createConnection() {
-    throw new Error("Unsupported Action");
+  async createConnection(
+    follower: anchor.web3.PublicKey,
+    profileToFollow: anchor.web3.PublicKey
+  ) {
+    const [connectionAccount, _] = await this.connectionPDA(
+      follower,
+      profileToFollow
+    );
+    return this.sdk.program.methods
+      .initializeConnection()
+      .accounts({
+        connection: connectionAccount,
+        profile: profileToFollow,
+        authority: follower,
+        systemProgram: SystemProgram.programId,
+      })
+      .rpc();
   }
 
-  closeConnection() {
-    throw new Error("Unsupported Action");
+  async closeConnection(
+    follower: anchor.web3.PublicKey,
+    profileToFollow: anchor.web3.PublicKey
+  ) {
+    const [connectionAccount, _] = await this.connectionPDA(
+      follower,
+      profileToFollow
+    );
+    return this.sdk.program.methods
+      .closeConnection()
+      .accounts({
+        connection: connectionAccount,
+        profile: profileToFollow,
+        authority: follower,
+        systemProgram: SystemProgram.programId,
+      })
+      .rpc();
   }
 }
