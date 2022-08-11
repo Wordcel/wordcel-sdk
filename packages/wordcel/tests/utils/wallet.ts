@@ -5,7 +5,7 @@ export class DummyWallet {
 
   constructor() {
     const dummyPair = Keypair.generate();
-    const publicKey = dummyPair.publicKey;
+    this.publicKey = dummyPair.publicKey;
   }
 
   async signTransaction(tx: Transaction): Promise<Transaction> {

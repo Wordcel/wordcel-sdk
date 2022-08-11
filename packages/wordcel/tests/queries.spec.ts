@@ -13,9 +13,16 @@ import { GraphQLClient } from "graphql-request";
 describe("Graph Queries", async () => {
   const graphqlEndpoint = "https://wordcel.conciselabs.io/v1/graphql";
 
+  // const gqlClient = new GraphQLClient(graphqlEndpoint, {
+  //   headers: {
+  //     "x-hasura-admin-secret": process.env["CONCISE_LABS_SECRET"],
+  //   },
+  // });
+
   const gqlClient = new GraphQLClient(graphqlEndpoint, {
     headers: {
-      "x-hasura-admin-secret": process.env["CONCISE_LABS_SECRET"],
+      "x-hasura-admin-secret":
+        "BqtN7EEkmIS8VN7lyNU0uh7eNCfZqBK57I32Xf8wwAyyf2u0VW1R2nQD2n3Wj481",
     },
   });
 
