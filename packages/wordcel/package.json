@@ -1,38 +1,26 @@
 {
-  "name": "@wordcel-ts/wordcel",
-  "version": "0.1.0",
-  "description": "Library to interact with the onchain wordcel program",
-  "author": "abishekk92 <shek@wordcel.club>",
-  "homepage": "",
-  "license": "MIT",
-  "main": "lib/wordcel.js",
-  "typings": "ib/index.d.ts",
-  "directories": {
-    "lib": "lib",
-    "test": "tests"
-  },
+  "name": "@wordcel/wordcel-ts",
+  "version": "1.0.0",
+  "description": "Core Package",
+  "main": "lib/index.js",
   "files": [
     "lib"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
+  "license": "MIT",
+  "author": "Shek <shek@wordcel.io>",
   "scripts": {
-    "build": "tsc",
-    "test": "mocha -r ts-node/register tests/*.spec.ts"
+    "build": "run-s clean build:tsc",
+    "build:tsc": "tsc -b",
+    "clean": "rimraf lib coverage tsconfig.tsbuildinfo"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.1",
-    "@types/mocha": "^9.1.1",
-    "chai": "^4.3.6",
-    "mocha": "^10.0.0",
-    "prettier": "^2.7.1"
+    "ts-node": "^8.6.2"
   },
   "dependencies": {
-    "@bundlr-network/client": "^0.5.12",
-    "@project-serum/anchor": "^0.24.2",
-    "graphql": "^16.5.0",
-    "graphql-request": "^4.3.0",
-    "ts-node": "^10.9.1"
+    "find-up": "^4.1.0",
+    "@bundlr-network/client": "^0.8.3",
+    "@project-serum/anchor": "^0.25.0",
+    "graphql": "^16.6.0",
+    "graphql-request": "^5.0.0"
   }
 }

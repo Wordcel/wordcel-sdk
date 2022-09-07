@@ -1,9 +1,17 @@
 {
- "extends": "../../tsconfig.json",
- "compilerOptions": {
-   "outDir": "lib"
- },
- "include": [
-   "src"
- ]
-}
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+      "outDir": "lib",
+      "rootDir": "src",
+      "baseUrl": "./",
+      "declaration": true,
+      "declarationMap": true,
+      "emitDecoratorMetadata": true,
+      "module": "commonjs",
+      "noEmit": false,
+      "composite": true
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "**/__tests__/*", "**/__e2e__/*"]
+  }
+  
