@@ -6,7 +6,15 @@ import randombytes from "randombytes";
 const { SystemProgram } = anchor.web3;
 // Temp
 const invitationProgram = SystemProgram;
-
+/**
+ * Creates a Profile Object
+ *
+ * @remarks
+ * This object is used to create and read a profile of a user.
+ *
+ *
+ * @beta
+ */
 export class Profile {
   readonly sdk: SDK;
 

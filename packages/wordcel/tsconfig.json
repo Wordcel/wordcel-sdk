@@ -9,9 +9,9 @@
       "emitDecoratorMetadata": true,
       "module": "commonjs",
       "noEmit": false,
-      "composite": true
+      "resolveJsonModule": true
     },
     "include": ["src/**/*"],
-    "exclude": ["node_modules", "**/__tests__/*", "**/__e2e__/*"]
+    "exclude": [ "**/__tests__/*", "**/__e2e__/*"]
   }
   

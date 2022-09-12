@@ -9,9 +9,7 @@
   "license": "MIT",
   "author": "Shek <shek@wordcel.io>",
   "scripts": {
-    "build": "run-s clean build:tsc",
-    "build:tsc": "tsc -b",
-    "clean": "rimraf lib coverage tsconfig.tsbuildinfo"
+    "build": "tsc"
   },
   "devDependencies": {
     "ts-node": "^8.6.2"
