@@ -24,19 +24,18 @@ import * as anchor from "@project-serum/anchor";
 require("@solana/wallet-adapter-react-ui/styles.css");
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const network = WalletAdapterNetwork.Devnet;
+
 
   // You can also provide a custom RPC endpoint.
-  const endpoint = useMemo(() => anchor.web3.clusterApiUrl(network), [network]);
+  const endpoint = "http://127.0.0.1:8899"
 
   const wallets = useMemo(
     () => [
       new PhantomWalletAdapter(),
       new GlowWalletAdapter(),
       new SlopeWalletAdapter(),
-      new SolflareWalletAdapter({ network }),
     ],
-    [network]
+    []
   );
   return (
     <ConnectionProvider endpoint={endpoint}>
