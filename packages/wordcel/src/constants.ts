@@ -8,7 +8,7 @@ export const WORDCEL_PROGRAMS = {
     "D9JJgeRf2rKq5LNMHLBMb92g4ZpeMgCyvZkd7QKwSCzg"
   ),
   localnet: new anchor.web3.PublicKey(
-    "D9JJgeRf2rKq5LNMHLBMb92g4ZpeMgCyvZkd7QKwSCzg"
+    "CTR82i94BRme1qTNNVzDHW78Ssa9wFSmUZ1dpfYPqhp4"
   ),
 };
 

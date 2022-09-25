@@ -2,17 +2,9 @@ import { SDK } from "./sdk";
 import * as anchor from "@project-serum/anchor";
 import { SEED_PREFIXES, WORDCEL_PROGRAMS } from "./constants";
 import randombytes from "randombytes";
+import { gql } from "graphql-request";
 
 const { SystemProgram } = anchor.web3;
-/**
- * Creates a Post Object
- *
- * @remarks
- * This object is used to create,update and read posts.
- *
- *
- * @beta
- */
 export class Post {
   readonly sdk: SDK;
 
@@ -35,6 +27,66 @@ export class Post {
       WORDCEL_PROGRAMS[this.sdk.cluster]
     );
   }
+
+  /**
+   * Fetches the List of all the Profile's created by a user Pubkey
+   *EW8yRoHiGdvzK8rjAtaTS5MgZyVRUbBR35eKFF9e4mu8
+   * @remarks
+   * This Function uses the indexed data and is more efficient in querying it
+   *
+   *
+   * @param profile - User Pubkey
+   *
+   * @returns all the Profiles created by a User
+   *
+   * @beta
+   */
+  getProfilesByUser(user: anchor.web3.PublicKey) {
+    const query = gql`
+        query getProfileByUser {
+          wordcel_0_1_1_decoded_profile( where: {
+              authority: { _eq: "${user}" }
+            }
+          ) {
+            cl_pubkey
+          }
+        }
+      `;
+    return this.sdk.gqlClient.request(query);
+  }
+
+  /**
+   * Fetches the List of all the Post's created by a profile Pubkey
+   *EW8yRoHiGdvzK8rjAtaTS5MgZyVRUbBR35eKFF9e4mu8
+   * @remarks
+   * This Function uses the indexed data and is more efficient in querying it
+   *
+   *
+   * @param profile - ProfilePDA Pubkey
+   *
+   * @returns all the post's and its data created by this profile
+   *
+   * @beta
+   */
+  getPostsByProfile(profile: anchor.web3.PublicKey) {
+    // TODO: Add order by and pagination
+    const query = gql`
+        query getAllPostsOfAProfile {
+          wordcel_0_1_1_decoded_profile( where: {
+              cl_pubkey: { _eq: "${profile}" }
+            }
+          ) {
+            authority
+            cl_pubkey
+            posts_inside_profile {
+              cl_pubkey
+              metadatauri
+            }
+          }
+        }
+      `;
+    return this.sdk.gqlClient.request(query);
+  }
   /**
    * Data inside the Post PDA
    *
@@ -44,9 +96,9 @@ export class Post {
    *
    * @beta
    */
-  getPost(account: anchor.web3.PublicKey) {
-    return this.sdk.program.account.post.fetch(account);
-  }
+  // getPost(account: anchor.web3.PublicKey) {
+  //   return this.sdk.program.account.post.fetch(account);
+  // }
   /**
    * Creates a new post on-chain
    *
@@ -71,7 +123,7 @@ export class Post {
         authority: user,
         systemProgram: SystemProgram.programId,
       })
-      .rpc();
+      .instruction();
   }
   /**
    * Updates the on-chain post
@@ -96,6 +148,6 @@ export class Post {
         authority: user,
         systemProgram: SystemProgram.programId,
       })
-      .rpc();
+      .instruction();
   }
 }

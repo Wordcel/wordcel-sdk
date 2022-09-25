@@ -1,19 +1,12 @@
-import { PublicKey, Keypair, Transaction } from "@solana/web3.js";
+import * as anchor from "@project-serum/anchor";
+import fs from "fs";
 
-export class DummyWallet {
-  publicKey: PublicKey;
+const jsonKeypair = fs.readFileSync("./id.json", "utf8");
 
-  constructor() {
-    const dummyPair = Keypair.generate();
-    const publicKey = dummyPair.publicKey;
-  }
+const keypair = anchor.web3.Keypair.fromSecretKey(
+  Buffer.from(JSON.parse(jsonKeypair))
+);
 
-  async signTransaction(tx: Transaction): Promise<Transaction> {
-    tx = new Transaction();
-    return Promise.resolve(tx);
-  }
+const wallet = new anchor.Wallet(keypair);
 
-  async signAllTransactions(txs: Transaction[]): Promise<Transaction[]> {
-    return Promise.resolve(txs);
-  }
-}
+export default wallet;
