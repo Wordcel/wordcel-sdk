@@ -88,6 +88,33 @@ export class Profile {
   }
 
   /**
+   * Fetches the List of all the Profile's created by a user Pubkey
+   *EW8yRoHiGdvzK8rjAtaTS5MgZyVRUbBR35eKFF9e4mu8
+   * @remarks
+   * This Function uses the indexed data and is more efficient in querying it
+   *
+   *
+   * @param profile - User Pubkey
+   *
+   * @returns all the Profiles created by a User
+   *
+   * @beta
+   */
+  getProfilesByUser(user: anchor.web3.PublicKey) {
+    const query = gql`
+        query getProfileByUser {
+          wordcel_0_1_1_decoded_profile( where: {
+              authority: { _eq: "${user}" }
+            }
+          ) {
+            cl_pubkey
+          }
+        }
+      `;
+    return this.sdk.gqlClient.request(query);
+  }
+
+  /**
    * This Function return's the data for a profile account PDA
    *
    * @remarks

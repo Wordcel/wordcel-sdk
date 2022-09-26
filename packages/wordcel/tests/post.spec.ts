@@ -27,9 +27,7 @@ describe("Post", async () => {
 
     const gqlClient = new GraphQLClient(graphqlEndpoint, {
       headers: {
-        "x-hasura-admin-secret":
-          process.env["CONCISE_LABS_SECRET"] ||
-          "BqtN7EEkmIS8VN7lyNU0uh7eNCfZqBK57I32Xf8wwAyyf2u0VW1R2nQD2n3Wj481",
+        "x-hasura-admin-secret": process.env["CONCISE_LABS_SECRET"] || "",
       },
     });
 

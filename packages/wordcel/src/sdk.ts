@@ -7,6 +7,7 @@ import { Profile } from "./profile";
 import { Post } from "./post";
 import { Connection } from "./connection";
 
+require("dotenv").config();
 
 export class SDK {
   readonly program: anchor.Program;
@@ -21,16 +22,14 @@ export class SDK {
     cluster: Cluster | "localnet",
     gqlClient: GraphQLClient
   ) {
-
-
     const provider = new anchor.AnchorProvider(connection, wallet, opts);
-    console.log("PROGRAM",WORDCEL_PROGRAMS[cluster].toString());
+    console.log("PROGRAM", WORDCEL_PROGRAMS[cluster].toString());
     this.program = new anchor.Program(
       wordcel_idl as anchor.Idl,
       WORDCEL_PROGRAMS[cluster],
       provider
-    ) 
-    
+    );
+
     this.provider = provider;
     this.cluster = cluster;
     this.gqlClient = gqlClient;

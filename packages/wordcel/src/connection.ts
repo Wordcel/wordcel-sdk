@@ -37,16 +37,16 @@ export class Connection {
     );
   }
 
-  getConnectionOfUser(account: anchor.web3.PublicKey) {
-    return this.sdk.program.account.connection.all([
-      {
-        memcmp: {
-          offset: 8 + 32,
-          bytes: account.toBase58(),
-        },
-      },
-    ]);
-  }
+  // getConnectionOfUser(account: anchor.web3.PublicKey) {
+  //   return this.sdk.program.account.connection.all([
+  //     {
+  //       memcmp: {
+  //         offset: 8 + 32,
+  //         bytes: account.toBase58(),
+  //       },
+  //     },
+  //   ]);
+  // }
 
   /**
    * Return's the List of all the posts for a user Publickey

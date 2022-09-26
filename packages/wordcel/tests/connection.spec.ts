@@ -27,9 +27,7 @@ describe("Connection", async () => {
 
     const gqlClient = new GraphQLClient(graphqlEndpoint, {
       headers: {
-        "x-hasura-admin-secret":
-          process.env["CONCISE_LABS_SECRET"] ||
-          "BqtN7EEkmIS8VN7lyNU0uh7eNCfZqBK57I32Xf8wwAyyf2u0VW1R2nQD2n3Wj481",
+        "x-hasura-admin-secret": process.env["CONCISE_LABS_SECRET"] || "",
       },
     });
 
@@ -98,8 +96,12 @@ describe("Connection", async () => {
     console.log("Closed the Connection 😔 :- ", sig);
   });
   it("Should Fetch the Data from a Connection PDA", async () => {
-    const connectionPDA = new anchor.web3.PublicKey("");
-    const data = await connection.getConnectionPDAData(connectionPDA);
+    const follower = wallet.publicKey;
+    // This is a Profile Account
+    const profileToFollow = new anchor.web3.PublicKey("");
+
+    const connectionPDA = connection.connectionPDA(follower, profileToFollow);
+    const data = await connection.getConnectionPDAData(connectionPDA[0]);
 
     console.log("Data of the ConnectionPDA Account", data);
   });

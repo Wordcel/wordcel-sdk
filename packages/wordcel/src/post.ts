@@ -3,6 +3,7 @@ import * as anchor from "@project-serum/anchor";
 import { SEED_PREFIXES, WORDCEL_PROGRAMS } from "./constants";
 import randombytes from "randombytes";
 import { gql } from "graphql-request";
+import { program } from "@project-serum/anchor/dist/cjs/spl/associated-token";
 
 const { SystemProgram } = anchor.web3;
 export class Post {
@@ -28,31 +29,8 @@ export class Post {
     );
   }
 
-  /**
-   * Fetches the List of all the Profile's created by a user Pubkey
-   *EW8yRoHiGdvzK8rjAtaTS5MgZyVRUbBR35eKFF9e4mu8
-   * @remarks
-   * This Function uses the indexed data and is more efficient in querying it
-   *
-   *
-   * @param profile - User Pubkey
-   *
-   * @returns all the Profiles created by a User
-   *
-   * @beta
-   */
-  getProfilesByUser(user: anchor.web3.PublicKey) {
-    const query = gql`
-        query getProfileByUser {
-          wordcel_0_1_1_decoded_profile( where: {
-              authority: { _eq: "${user}" }
-            }
-          ) {
-            cl_pubkey
-          }
-        }
-      `;
-    return this.sdk.gqlClient.request(query);
+  getPost(postAccount: anchor.web3.PublicKey) {
+    return this.sdk.program.account.post.fetch(postAccount);
   }
 
   /**
