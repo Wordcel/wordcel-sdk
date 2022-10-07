@@ -3,10 +3,10 @@ run-name: ${{ github.actor }} is deploying documention 🚀
 on:
   push:
     branches:
-      - gh-pages
+      - typedoc
   pull_request:
     branches:
-      - gh-pages
+      - typedoc
 jobs:
   Build-Documentation:
     runs-on: ubuntu-latest
