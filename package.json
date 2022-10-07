@@ -1,14 +1,13 @@
 {
-  "name": "@wordcel/wordcel",
+  "name": "@wordcel/sdk",
   "version": "1.0.0",
   "main": "lib/index.js",
-  "private": true,
   "files": [
     "lib"
   ],
   "scripts": {
     "typedoc": "cd ./packages/wordcel && typedoc --excludePrivate --tsconfig ./tsconfig.json --out ../../docs ./src/index.ts",
-    "typedoc:publish": "npm run typedoc && gh-pages --dist ./packages/wordcel/src --dest ./docs",
+    "typedoc:publish": "npm run typedoc && gh-pages --dist ./packages/wordcel/src --dest ./docs"
   },
   "license": "MIT",
   "workspaces": [
