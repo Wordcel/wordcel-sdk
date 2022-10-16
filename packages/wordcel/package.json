@@ -9,12 +9,15 @@
   "license": "MIT",
   "author": "Shek <shek@wordcel.io>",
   "scripts": {
-    "build": "tsc "
+    "build": "tsc ",
+    "test": "ts-mocha -p tsconfig.json tests/**/*.spec.ts"
   },
   "devDependencies": {
     "@types/mocha": "^9.1.1",
     "chai": "^4.3.6",
     "dotenv": "^16.0.2",
+    "mocha": "^10.1.0",
+    "ts-mocha": "^10.0.0",
     "ts-node": "^8.6.2"
   },
   "dependencies": {

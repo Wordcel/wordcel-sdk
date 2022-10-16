@@ -17,3 +17,6 @@ export const SEED_PREFIXES = {
   profile: Buffer.from("profile"),
   connection: Buffer.from("connection"),
 };
+
+export const GRPAPHQL_ENDPOINT =
+  "https://public-wordcel.conciselabs.io/v1/graphql";

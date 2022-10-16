@@ -21,7 +21,6 @@ export class SDK {
     gqlClient: GraphQLClient
   ) {
     const provider = new anchor.AnchorProvider(connection, wallet, opts);
-    console.log("PROGRAM", WORDCEL_PROGRAMS[cluster].toString());
     this.program = new anchor.Program(
       wordcel_idl as anchor.Idl,
       WORDCEL_PROGRAMS[cluster],

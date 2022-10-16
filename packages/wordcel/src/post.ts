@@ -3,7 +3,6 @@ import * as anchor from "@project-serum/anchor";
 import { SEED_PREFIXES, WORDCEL_PROGRAMS } from "./constants";
 import randombytes from "randombytes";
 import { gql } from "graphql-request";
-import { program } from "@project-serum/anchor/dist/cjs/spl/associated-token";
 
 const { SystemProgram } = anchor.web3;
 export class Post {
@@ -50,16 +49,13 @@ export class Post {
     // TODO: Add order by and pagination
     const query = gql`
         query getAllPostsOfAProfile {
-          wordcel_0_1_1_decoded_profile( where: {
-              cl_pubkey: { _eq: "${profile}" }
+          wordcel_0_1_1_decoded_post( where: {
+              profile: { _eq: "${profile}" }
             }
           ) {
-            authority
+            profile
             cl_pubkey
-            posts_inside_profile {
-              cl_pubkey
-              metadatauri
-            }
+            metadatauri
           }
         }
       `;

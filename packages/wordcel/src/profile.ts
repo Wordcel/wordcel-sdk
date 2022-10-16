@@ -2,7 +2,7 @@ import { SDK } from "./sdk";
 import * as anchor from "@project-serum/anchor";
 import { SEED_PREFIXES, WORDCEL_PROGRAMS } from "./constants";
 import randombytes from "randombytes";
-import { gql, GraphQLClient } from "graphql-request";
+import { gql } from "graphql-request";
 const { SystemProgram } = anchor.web3;
 
 /**
