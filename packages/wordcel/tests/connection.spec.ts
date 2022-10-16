@@ -25,11 +25,7 @@ describe("Connection", async () => {
 
     const graphqlEndpoint = "https://wordcel.conciselabs.io/v1/graphql";
 
-    const gqlClient = new GraphQLClient(graphqlEndpoint, {
-      headers: {
-        "x-hasura-admin-secret": process.env["CONCISE_LABS_SECRET"] || "",
-      },
-    });
+    const gqlClient = new GraphQLClient(graphqlEndpoint);
 
     const sdk = new wordcelSDK.SDK(
       wallet as NodeWallet,

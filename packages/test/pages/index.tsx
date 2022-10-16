@@ -31,11 +31,7 @@ const Home: NextPage = () => {
   const connection = new anchor.web3.Connection(connectionURI);
   const anchorWallet = useAnchorWallet();
   const graphqlEndpoint = "https://wordcel.conciselabs.io/v1/graphql";
-  const gqlClient = new GraphQLClient(graphqlEndpoint, {
-    headers: {
-      "x-hasura-admin-secret": process.env["CONCISE_LABS_SECRET"],
-    },
-  });
+  const gqlClient = new GraphQLClient(graphqlEndpoint);
 
   const opts = {
     preflightCommitment: "processed" as anchor.web3.ConfirmOptions,
@@ -67,7 +63,7 @@ const Home: NextPage = () => {
         "localnet",
         gqlClient
       );
-      const res = await sdk.profile.getProfilefromUser(wallet.publicKey);
+      const res = await sdk.profile.getProfilesByUser(wallet.publicKey);
       const createConnection = await sdk.connection.createConnection(
         wallet.publicKey,
         res[0].publicKey
@@ -102,9 +98,9 @@ const Home: NextPage = () => {
         "localnet",
         gqlClient
       );
-      const getPost = await sdk.post.getPost(wallet.publicKey);
+      const getPost: any = await sdk.post.getPost(wallet.publicKey);
       console.log(getPost);
-      const res = await sdk.profile.getProfilefromUser(wallet.publicKey);
+      const res = await sdk.profile.getProfilesByUser(wallet.publicKey);
       const updatePost = await sdk.post.updatePost(
         wallet.publicKey,
         res[0].publicKey,
@@ -141,7 +137,7 @@ const Home: NextPage = () => {
         "localnet",
         gqlClient
       );
-      const res = await sdk.profile.getProfilefromUser(wallet.publicKey);
+      const res = await sdk.profile.getProfilesByUser(wallet.publicKey);
       console.log("Account Details", res);
       console.log("Account Key", res[0].publicKey);
       const createPost = await sdk.post.createPost(
@@ -180,7 +176,7 @@ const Home: NextPage = () => {
         "localnet",
         gqlClient
       );
-      const res = await sdk.profile.getProfilefromUser(wallet.publicKey);
+      const res = await sdk.profile.getProfilesByUser(wallet.publicKey);
       console.log("Account Details", res);
       console.log("Account Key", res[0].publicKey);
       const getPost = await sdk.post.getPost(wallet.publicKey);

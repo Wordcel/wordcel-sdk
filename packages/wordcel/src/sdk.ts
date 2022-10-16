@@ -7,8 +7,6 @@ import { Profile } from "./profile";
 import { Post } from "./post";
 import { Connection } from "./connection";
 
-require("dotenv").config();
-
 export class SDK {
   readonly program: anchor.Program;
   readonly provider: anchor.AnchorProvider;
