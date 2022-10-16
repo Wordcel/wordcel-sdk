@@ -101,16 +101,15 @@ export class Connection {
               where: {authority: {_eq: "${user}"}}
               ) {
                   profile
-                  profile_in_connection {
-                      authority
-                  }
+                  authority
+                  cl_pubkey
               }
         }
       `;
     return this.sdk.gqlClient.request(query);
   }
   /**
-   * Fetches the Data of the Connections for a Profile PDA
+   * Incoming Connections for a Profile PDA
    *
    * @remarks
    * This Function uses the indexed data and is more efficient in querying it
@@ -130,9 +129,7 @@ export class Connection {
               ) {
                   authority
                   cl_pubkey
-                  profile_in_connection {
-                      authority
-                  }
+                  profile
               }
         }
       `;
