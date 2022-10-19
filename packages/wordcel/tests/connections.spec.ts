@@ -7,7 +7,7 @@ import { GraphQLClient } from "graphql-request";
 import NodeWallet from "@project-serum/anchor/dist/cjs/nodewallet";
 import { GRPAPHQL_ENDPOINT } from "../src/constants";
 
-describe.only("Connection", async () => {
+describe("Connection", async () => {
   let profile: wordcelSDK.Profile;
 
   const user = new anchor.web3.PublicKey(

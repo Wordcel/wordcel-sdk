@@ -30,9 +30,11 @@ describe("Post", async () => {
     "localnet",
     gqlClient
   );
-  let profiles = await sdk.profile.getProfilesByUser(user);
 
-  profile = profiles["wordcel_0_1_1_decoded_profile"][0].cl_pubkey;
+  before(async () => {
+    let profiles = await sdk.profile.getProfilesByUser(user);
+    profile = profiles["wordcel_0_1_1_decoded_profile"][0].cl_pubkey;
+  });
 
   it("Get All Posts by a user", async () => {
     const posts = await sdk.post.getPostsByProfile(
