@@ -1,21 +1,21 @@
 import { SDK } from "./sdk";
 import * as anchor from "@project-serum/anchor";
-import { SEED_PREFIXES, WORDCEL_PROGRAMS } from "./constants";
+import { SEED_PREFIXES, WORDCEL_INVITE_PROGRAMS, WORDCEL_PROGRAMS } from "./constants";
 import randombytes from "randombytes";
 import { gql } from "graphql-request";
 const { SystemProgram } = anchor.web3;
 
-/**
- * Object that contains the Publickey of the invitation Program
- *
- *
- * @beta
- */
-const invitationProgram = {
-  programId: new anchor.web3.PublicKey(
-    "7yZdmhNtEFBXTioxxp6qb8k1GoQw3uxrqRn1675FhV9n"
-  ),
-};
+// /**
+//  * Object that contains the Publickey of the invitation Program
+//  *
+//  *
+//  * @beta
+//  */
+// const invitationProgram = {
+//   programId: new anchor.web3.PublicKey(
+//     "7yZdmhNtEFBXTioxxp6qb8k1GoQw3uxrqRn1675FhV9n"
+//   ),
+// };
 /**
  * This Class contains all the Function's that includes interaction with Profile Account on-chain
  *
@@ -153,7 +153,7 @@ export class Profile {
         profile: profileAccount,
         user: user,
         invitation: inviteAccount,
-        invitationProgram: invitationProgram.programId,
+        invitationProgram: WORDCEL_INVITE_PROGRAMS[this.sdk.cluster],
         systemProgram: SystemProgram.programId,
       })
       .instruction();

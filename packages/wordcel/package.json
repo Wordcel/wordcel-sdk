@@ -1,6 +1,6 @@
 {
   "name": "@wordcel/sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Wordcel SDK",
   "keywords": [
     "wordcel",
@@ -16,10 +16,12 @@
   "author": "Shek <shek@wordcel.io>",
   "scripts": {
     "build": "tsc ",
-    "test": "ts-mocha -p tsconfig.json tests/**/*.spec.ts"
+    "test": "ts-mocha -p tsconfig.json tests/test.ts"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.3",
     "@types/mocha": "^9.1.1",
+    "@types/randombytes": "^2.0.0",
     "chai": "^4.3.6",
     "dotenv": "^16.0.2",
     "mocha": "^10.1.0",
